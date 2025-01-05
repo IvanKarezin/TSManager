@@ -31,7 +31,7 @@
             </Menu>
         </DockPanel>
         <DockPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Dock="Left">
-            <TreeView>
+            <TreeView Name="TimeSheetsList">
                 <TreeViewItem Header="2024-12-23 Таймшиты Карезин Иван S_334.txt">
                     <TreeViewItem Header="23.12.2024"></TreeViewItem>
                     <TreeViewItem Header="24.12.2024"></TreeViewItem>

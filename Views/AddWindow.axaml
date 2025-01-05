@@ -21,18 +21,18 @@
             <Label>Работаю над задачей: (может быть пустым)</Label>
             <TextBox Margin="5" Watermark="Заголовок задачи"></TextBox>
             <Label>Краткое описание активности</Label>
-            <TextBox Margin="5" TextWrapping="Wrap" Watermark="Описание активности"></TextBox>
+            <TextBox Name="ActivityDescription" Margin="5" TextWrapping="Wrap" Watermark="Описание активности"></TextBox>
             <Label>Продолжительность (прогнозируемая)</Label>
             <NumericUpDown Margin="5" Watermark="Дни" />
             <NumericUpDown Margin="5" Watermark="Часы" />
             <NumericUpDown Margin="5" Watermark="Минуты" />
-            <Label>Время начала (может быть пустым)</Label>
-            <TimePicker HorizontalAlignment="Center" Margin="3" MinuteIncrement="15" />
-            <Label>Время окончания (может быть пустым)</Label>
-            <TimePicker HorizontalAlignment="Center" Margin="3" MinuteIncrement="15" />
+            <Label Name="BeginLabel">Время начала (может быть пустым)</Label>
+            <TimePicker Name="BeginPicker" HorizontalAlignment="Center" Margin="3" MinuteIncrement="15" />
+            <Label Name="EndLabel">Время окончания (может быть пустым)</Label>
+            <TimePicker Name="EndPicker" HorizontalAlignment="Center" Margin="3" MinuteIncrement="15" />
         </StackPanel>
         <DockPanel Margin="5" Grid.Row="1">
-            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" DockPanel.Dock="Top">OK</Button>
+            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" DockPanel.Dock="Top" Click="Ok_Button_OnClick">OK</Button>
             <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" DockPanel.Dock="Bottom">Cancel</Button>
         </DockPanel>
     </Grid>

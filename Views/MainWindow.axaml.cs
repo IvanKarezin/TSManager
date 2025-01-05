@@ -1,17 +1,15 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System.Threading.Tasks;
+using MsBox.Avalonia;
 
 namespace TSManager.Views;
 
 public partial class MainWindow : Window
 {
-    private readonly AddWindow _addWindow;
-
     public MainWindow()
     {
         InitializeComponent();
-        this._addWindow = new AddWindow();
         this.Closing += (sender, args) =>
         {
             ((Window)sender)?.Hide();
@@ -19,12 +17,10 @@ public partial class MainWindow : Window
         };
     }
 
-    public async Task<string> ShowAddDialog()
+    public async Task<string> ShowAddDialog(bool autostart = false)
     {
-        //TODO: вызов соответствующей команды и передача result
-        //TODO: создание DTO для TS и передача его команде
-        var result = await this._addWindow.ShowDialog<string>(this);
-        this._addWindow.Show();
+        var addDialog = new AddWindow(this, autostart);
+        var result = await addDialog.ShowDialog<string>(this);
         
         return result;
     }
@@ -32,7 +28,8 @@ public partial class MainWindow : Window
     private async void Button_OnClick(object? sender, RoutedEventArgs e)
     {
         var result = await this.ShowAddDialog();
-        
+        var box = MessageBoxManager.GetMessageBoxStandard("Result", result).ShowAsync();
+
         //TODO: вызов соответствующей команды и передача result
         //TODO: создание DTO для TS и передача его команде
     }

@@ -63,14 +63,16 @@ public partial class App : Application
 
     private async void NativeMenuItem_AddWithSuspense_OnClick(object? sender, EventArgs e)
     {
-        var result = this._mainWindow?.ShowAddDialog();
+        this._mainWindow?.Show();
+        var result = await this._mainWindow?.ShowAddDialog(true);
         //TODO: вызов соответствующей команды и передача result
         //TODO: создание DTO для TS и передача его команде
     }
 
     private async void NativeMenuItem_WithStop_OnClick(object? sender, EventArgs e)
     {
-        var result = this._mainWindow?.ShowAddDialog();
+        this._mainWindow?.Show();
+        var result = await this._mainWindow?.ShowAddDialog(true);
         //TODO: вызов соответствующей команды и передача result
         //TODO: создание DTO для TS и передача его команде
     }
