@@ -33,4 +33,27 @@ public partial class MainWindow : Window
         //TODO: вызов соответствующей команды и передача result
         //TODO: создание DTO для TS и передача его команде
     }
+
+    private void SetReadOnlyTimePeriodsAndCurrentProperty()
+    {
+        if (this.IsExec.IsChecked ?? false)
+        {
+            this.BeginTimePicker.IsEnabled = false;
+            this.EndTimePicker.IsEnabled = false;
+            this.SuspenseCurrent.IsEnabled = true;
+            this.StopCurrent.IsEnabled = true;
+            
+            return;
+        }
+        
+        this.BeginTimePicker.IsEnabled = true;
+        this.EndTimePicker.IsEnabled = true;
+        this.SuspenseCurrent.IsEnabled = false;
+        this.StopCurrent.IsEnabled = false;
+    }
+
+    private void IsExec_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        this.SetReadOnlyTimePeriodsAndCurrentProperty();
+    }
 }

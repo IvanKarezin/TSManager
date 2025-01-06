@@ -26,6 +26,11 @@
             <NumericUpDown Margin="5" Watermark="Дни" />
             <NumericUpDown Margin="5" Watermark="Часы" />
             <NumericUpDown Margin="5" Watermark="Минуты" />
+            <Label Name="IsExecLabel">Сделать выполняемой</Label>
+            <CheckBox Name="IsExec" IsChecked="False" IsCheckedChanged="IsExec_OnIsCheckedChanged"/>
+            <Label Name="CurrentTaskPolicyLabel">Текущая</Label>
+            <RadioButton Name="SuspenseCurrent" GroupName="CurrentTaskPolicy" IsEnabled="False">Приостановить текущую</RadioButton>
+            <RadioButton Name="StopCurrent" GroupName="CurrentTaskPolicy" IsEnabled="False">Закончить текущую</RadioButton>
             <Label Name="BeginLabel">Время начала (может быть пустым)</Label>
             <TimePicker Name="BeginPicker" HorizontalAlignment="Center" Margin="3" MinuteIncrement="15" />
             <Label Name="EndLabel">Время окончания (может быть пустым)</Label>
