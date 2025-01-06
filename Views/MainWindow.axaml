@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        ShowInTaskbar="True"
+        SizeToContent="Height"
         x:Class="TSManager.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -14,7 +16,81 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    
+    <Grid ColumnDefinitions="2.2*,4,4*,2*" RowDefinitions="*,8*,*,*">
+        <DockPanel Grid.ColumnSpan="4">
+            <Menu Name="FileMenu" DockPanel.Dock="Top">
+                <MenuItem Header="Файл">
+                    <MenuItem Header="Создать таймшит" />
+                    <MenuItem Header="Открыть каталог" />
+                    <MenuItem Header="Сохранить" />
+                </MenuItem>
+                <MenuItem Header="Сервис">
+                    <MenuItem Header="Параметры" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Dock="Left">
+            <TreeView Name="TimeSheetsList">
+                <TreeViewItem Header="2024-12-23 Таймшиты Карезин Иван S_334.txt">
+                    <TreeViewItem Header="23.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="24.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="25.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="26.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="27.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="28.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="29.12.2024"></TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Header="2024-12-16 Таймшиты Карезин Иван S_334.txt">
+                    <TreeViewItem Header="23.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="24.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="25.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="26.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="27.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="28.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="29.12.2024"></TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Header="2024-12-06 Таймшиты Карезин Иван S_334.txt">
+                    <TreeViewItem Header="23.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="24.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="25.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="26.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="27.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="28.12.2024"></TreeViewItem>
+                    <TreeViewItem Header="29.12.2024"></TreeViewItem>
+                </TreeViewItem>
+            </TreeView>
+        </DockPanel>
+        <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns"></GridSplitter>
+        <DockPanel Grid.Column="2" Grid.Row="1" VerticalAlignment="Stretch">
+            <ListBox Name="Sheets" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top">
+                <ListBoxItem><TextBlock TextWrapping="Wrap">09:00-12:00 - Optimacros: WS BE-317/318 - дебаггинг, исправление submissions для системного справочника пользователей</TextBlock></ListBoxItem>
+                <ListBoxItem><TextBlock TextWrapping="Wrap">12:00-13:30 - Дейли, пост дейли</TextBlock></ListBoxItem>
+                <ListBoxItem><TextBlock TextWrapping="Wrap">13:30-14:00 - Общение с Игорем Лебедевым по задаче Optimacros: WS BE-317/318</TextBlock></ListBoxItem>
+                <ListBoxItem><TextBlock TextWrapping="Wrap">15:00-16:00 - Вводный курс в разработку - концепция гридов - просмотр, конспект</TextBlock></ListBoxItem>
+                <ListBoxItem><TextBlock TextWrapping="Wrap">16:00-18:00 - Вводный курс в разработку - Protobuf, использование Jsonсхема-валидатора - просмотр, конспект</TextBlock></ListBoxItem>
+            </ListBox>
+        </DockPanel>
+        <Button Grid.Column="2" Grid.Row="2" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Click="Button_OnClick">+</Button>
+        <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Margin="20, 0, 20, 20">
+            <TextBox Margin="3" TextWrapping="Wrap" Text="Optimacros: WS BE-317/318 - дебаггинг, исправление submissions для системного справочника пользователей"/>
+            <Label>Продолжительность</Label>
+            <NumericUpDown Watermark="Дни" />
+            <NumericUpDown Watermark="Часы" />
+            <NumericUpDown Watermark="Минуты" />
+            <Label Name="IsExecLabel">Сделать выполняемой</Label>
+            <CheckBox Name="IsExec" IsCheckedChanged="IsExec_OnIsCheckedChanged"/>
+            <Label Name="CurrentTaskPolicyLabel">Текущая</Label>
+            <RadioButton Name="SuspenseCurrent" GroupName="CurrentTaskPolicy" IsEnabled="False">Приостановить текущую</RadioButton>
+            <RadioButton Name="StopCurrent" GroupName="CurrentTaskPolicy" IsEnabled="False">Закончить текущую</RadioButton>
+            <Label Name="BeginTimeLabel">Время начала</Label>
+            <TimePicker Name="BeginTimePicker" HorizontalAlignment="Center" Margin="3" MinuteIncrement="15" SelectedTime="09:00" />
+            <Label Name="EndTimeLabel">Время окончания</Label>
+            <TimePicker Name="EndTimePicker" HorizontalAlignment="Center" Margin="3" MinuteIncrement="15" SelectedTime="12:00" />
+        </StackPanel>
+        <DockPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" HorizontalAlignment="Right" Margin="10, 0, 10, 10">
+            <Button Margin="10, 0, 10, 0">Пересчитать таймшиты</Button>
+            <Button Margin="10, 0, 10, 0">Сохранить</Button>
+        </DockPanel>
+    </Grid>
 </Window>

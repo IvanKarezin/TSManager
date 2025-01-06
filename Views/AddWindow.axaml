@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:TSManager.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
+        Width="400"
+        Height="600"
+        SizeToContent="Height"
+        x:Class="TSManager.Views.AddWindow"
+        x:DataType="vm:AddWindowViewModel"
+        Title="AddWindow">
+    
+    <Design.DataContext>
+        <vm:AddWindowViewModel />
+    </Design.DataContext>
+    
+    <Grid RowDefinitions="8*,*" ColumnDefinitions="*">
+        <StackPanel Grid.Row="0" Margin="10" VerticalAlignment="Stretch">
+            <TextBlock Margin="0,0,0,30" TextAlignment="Center" FontSize="25">Добавить Таймшит</TextBlock>
+            <Label>Работаю над задачей: (может быть пустым)</Label>
+            <TextBox Margin="5" Watermark="Заголовок задачи"></TextBox>
+            <Label>Краткое описание активности</Label>
+            <TextBox Name="ActivityDescription" Margin="5" TextWrapping="Wrap" Watermark="Описание активности"></TextBox>
+            <Label>Продолжительность (прогнозируемая)</Label>
+            <NumericUpDown Margin="5" Watermark="Дни" />
+            <NumericUpDown Margin="5" Watermark="Часы" />
+            <NumericUpDown Margin="5" Watermark="Минуты" />
+            <Label Name="IsExecLabel">Сделать выполняемой</Label>
+            <CheckBox Name="IsExec" IsChecked="False" IsCheckedChanged="IsExec_OnIsCheckedChanged"/>
+            <Label Name="CurrentTaskPolicyLabel">Текущая</Label>
+            <RadioButton Name="SuspenseCurrent" GroupName="CurrentTaskPolicy" IsEnabled="False">Приостановить текущую</RadioButton>
+            <RadioButton Name="StopCurrent" GroupName="CurrentTaskPolicy" IsEnabled="False">Закончить текущую</RadioButton>
+            <Label Name="BeginLabel">Время начала (может быть пустым)</Label>
+            <TimePicker Name="BeginPicker" HorizontalAlignment="Center" Margin="3" MinuteIncrement="15" />
+            <Label Name="EndLabel">Время окончания (может быть пустым)</Label>
+            <TimePicker Name="EndPicker" HorizontalAlignment="Center" Margin="3" MinuteIncrement="15" />
+        </StackPanel>
+        <DockPanel Margin="5" Grid.Row="1">
+            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" DockPanel.Dock="Top" Click="Ok_Button_OnClick">OK</Button>
+            <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" DockPanel.Dock="Bottom">Cancel</Button>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -1,6 +1,8 @@
-﻿namespace TSManager.ViewModels;
+﻿using System.Runtime.CompilerServices;
+using Avalonia.Controls;
+
+namespace TSManager.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public string Greeting { get; } = "Welcome to Avalonia!";
 }
