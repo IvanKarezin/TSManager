@@ -3,7 +3,7 @@
         xmlns:vm="using:TSManager.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
         ShowInTaskbar="True"
         SizeToContent="Height"
         x:Class="TSManager.Views.MainWindow"
@@ -90,7 +90,7 @@
         </StackPanel>
         <DockPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" HorizontalAlignment="Right" Margin="10, 0, 10, 10">
             <Button Margin="10, 0, 10, 0">Пересчитать таймшиты</Button>
-            <Button Margin="10, 0, 10, 0">Сохранить</Button>
+            <Button Margin="10, 0, 10, 0" Command="{Binding ExampleCommand}" CommandParameter="TEST">Сохранить</Button>
         </DockPanel>
     </Grid>
 </Window>

@@ -6,7 +6,7 @@ namespace TSManager.Views;
 
 public partial class AddWindow : Window
 {
-    private bool _autostart;
+    private readonly bool _autostart;
     
     public AddWindow(Window owner, bool autoStart = false)
     {
