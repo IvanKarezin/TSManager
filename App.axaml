@@ -4,23 +4,6 @@
              xmlns:local="using:TSManager"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-    
-    <TrayIcon.Icons>
-        <TrayIcons>
-            <TrayIcon Icon="/Assets/avalonia-logo.ico" 
-                      ToolTipText="Avalonia Tray Icon ToolTip">
-                <TrayIcon.Menu>
-                    <NativeMenu>
-                        <NativeMenuItem Header="Показать главное окно" Click="NativeMenuItem_OnClick" />
-                        <NativeMenuItem Header="Новая задача с приостановкой текущей" Click="NativeMenuItem_AddWithSuspense_OnClick"/>
-                        <NativeMenuItem Header="Новая задача с окончанием текущей" Click="NativeMenuItem_WithStop_OnClick"/>
-                        <NativeMenuItem Header="Следующая задача" />
-                        <NativeMenuItem Header="Выход" Click="NativeMenuItem_Close_OnClick" />
-                    </NativeMenu>
-                </TrayIcon.Menu>
-            </TrayIcon>
-        </TrayIcons>
-    </TrayIcon.Icons>
 
     <Application.DataTemplates>
         <local:ViewLocator/>

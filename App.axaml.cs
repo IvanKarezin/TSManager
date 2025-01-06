@@ -1,6 +1,6 @@
-using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
@@ -11,7 +11,6 @@ namespace TSManager;
 
 public partial class App : Application
 {
-    private MainWindow? _mainWindow;
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -28,8 +27,6 @@ public partial class App : Application
             {
                 DataContext = new MainWindowViewModel(),
             };
-            
-            this._mainWindow = desktop.MainWindow as MainWindow;
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -46,34 +43,5 @@ public partial class App : Application
         {
             BindingPlugins.DataValidators.Remove(plugin);
         }
-    }
-
-    private void NativeMenuItem_OnClick(object? sender, EventArgs e)
-    {
-        this._mainWindow?.Show();
-    }
-
-    private void NativeMenuItem_Close_OnClick(object? sender, EventArgs e)
-    {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            desktop.Shutdown();
-        }
-    }
-
-    private async void NativeMenuItem_AddWithSuspense_OnClick(object? sender, EventArgs e)
-    {
-        this._mainWindow?.Show();
-        var result = await this._mainWindow?.ShowAddDialog(true);
-        //TODO: вызов соответствующей команды и передача result
-        //TODO: создание DTO для TS и передача его команде
-    }
-
-    private async void NativeMenuItem_WithStop_OnClick(object? sender, EventArgs e)
-    {
-        this._mainWindow?.Show();
-        var result = await this._mainWindow?.ShowAddDialog(true);
-        //TODO: вызов соответствующей команды и передача result
-        //TODO: создание DTO для TS и передача его команде
     }
 }
