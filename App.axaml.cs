@@ -4,8 +4,10 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
+using DesktopNotifications;
 using TSManager.ViewModels;
 using TSManager.Views;
+using DesktopNotifications.Windows;
 
 namespace TSManager;
 
@@ -75,5 +77,18 @@ public partial class App : Application
         var result = await this._mainWindow?.ShowAddDialog(true);
         //TODO: вызов соответствующей команды и передача result
         //TODO: создание DTO для TS и передача его команде
+    }
+
+    private void NativeMenuItem_NextActivity_OnClick(object? sender, EventArgs e)
+    {
+        var mv = new WindowsNotificationManager();
+
+        var nt = new Notification()
+        {
+            Title = "TEST",
+            Body = "Next Activity",
+        };
+
+        mv.ShowNotification(nt, null);
     }
 }

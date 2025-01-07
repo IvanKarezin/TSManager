@@ -14,7 +14,7 @@
                         <NativeMenuItem Header="Показать главное окно" Click="NativeMenuItem_OnClick" />
                         <NativeMenuItem Header="Новая задача с приостановкой текущей" Click="NativeMenuItem_AddWithSuspense_OnClick"/>
                         <NativeMenuItem Header="Новая задача с окончанием текущей" Click="NativeMenuItem_WithStop_OnClick"/>
-                        <NativeMenuItem Header="Следующая задача" />
+                        <NativeMenuItem Header="Следующая задача" Click="NativeMenuItem_NextActivity_OnClick"/>
                         <NativeMenuItem Header="Выход" Click="NativeMenuItem_Close_OnClick" />
                     </NativeMenu>
                 </TrayIcon.Menu>
