@@ -3,11 +3,13 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Avalonia.Markup.Xaml;
 using DesktopNotifications;
 using TSManager.ViewModels;
 using TSManager.Views;
 using DesktopNotifications.Windows;
+using DesktopNotifications.FreeDesktop;
 
 namespace TSManager;
 
@@ -81,8 +83,8 @@ public partial class App : Application
 
     private void NativeMenuItem_NextActivity_OnClick(object? sender, EventArgs e)
     {
-        var mv = new WindowsNotificationManager();
-
+        var mv = this.GetNotificationManager();
+        mv.Initialize();
         var nt = new Notification()
         {
             Title = "TEST",
@@ -90,5 +92,16 @@ public partial class App : Application
         };
 
         mv.ShowNotification(nt, null);
+    }
+
+    private INotificationManager GetNotificationManager()
+    {
+        if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            return new WindowsNotificationManager();
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            return new FreeDesktopNotificationManager();
+        
+        throw new PlatformNotSupportedException();
     }
 }
