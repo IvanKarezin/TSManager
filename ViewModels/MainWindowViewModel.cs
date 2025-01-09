@@ -1,14 +1,20 @@
-﻿using System.Runtime.CompilerServices;
-using Avalonia.Controls;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using MsBox.Avalonia;
-using MsBox.Avalonia.Dto;
+using TSManager.Settings;
 
 namespace TSManager.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
     private RelayCommand<string>? _exampleCommand;
+    private readonly IAppSettings _settings;
+
+    public MainWindowViewModel()
+    {
+        this._settings = AppServiceProvider.GetAppSettingsProvider().AppSettings;
+    }
+    
+    public string? Test { get => _settings.Test; set { _settings.Test = value; OnPropertyChanged(); } }
 
     public RelayCommand<string> ExampleCommand
     {
