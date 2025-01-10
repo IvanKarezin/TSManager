@@ -16,6 +16,7 @@ namespace TSManager;
 public partial class App : Application
 {
     private MainWindow? _mainWindow;
+    private ExtendCurrentWindow? _extendCurrentWindow;
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -34,6 +35,11 @@ public partial class App : Application
             };
             
             this._mainWindow = desktop.MainWindow as MainWindow;
+
+            this._extendCurrentWindow = new ExtendCurrentWindow()
+            {
+                DataContext = new ExtendCurrentWindowViewModel(),
+            };
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -67,10 +73,12 @@ public partial class App : Application
 
     private async void NativeMenuItem_AddWithSuspense_OnClick(object? sender, EventArgs e)
     {
-        this._mainWindow?.Show();
-        var result = await this._mainWindow?.ShowAddDialog(true);
+        //this._mainWindow?.Show();
+        //var result = await this._mainWindow?.ShowAddDialog(true);
         //TODO: вызов соответствующей команды и передача result
         //TODO: создание DTO для TS и передача его команде
+        
+        this._extendCurrentWindow?.Show();
     }
 
     private async void NativeMenuItem_WithStop_OnClick(object? sender, EventArgs e)
