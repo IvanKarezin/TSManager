@@ -1,8 +1,11 @@
-using System.Runtime.CompilerServices;
+using System;
+using System.ComponentModel;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace TSManager.Settings;
 
-using Microsoft.Extensions.Configuration;
 
 public sealed class SettingsProvider : ISettingsProvider
 {
@@ -10,10 +13,25 @@ public sealed class SettingsProvider : ISettingsProvider
 
     public SettingsProvider()
     {
-        var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .Build();
+        var fileStream = new FileStream("appsettings.json", FileMode.OpenOrCreate);
+        try
+        {
+            AppSettings = JsonSerializer.Deserialize<AppSettings>(fileStream) ?? new AppSettings();
+        }
+        catch (JsonException e)
+        {
+            AppSettings = new AppSettings();
+        }
+        finally
+        {
+            fileStream.Dispose();
+        }
+        AppSettings.PropertyChanged += AppSettingsOnPropertyChanged;
+    }
 
-        this.AppSettings = new AppSettings(configuration.GetSection("AppSettings"));
+    private async void AppSettingsOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        await using var fileStream = new FileStream("appsettings.json", FileMode.OpenOrCreate);
+        await JsonSerializer.SerializeAsync(fileStream, AppSettings);
     }
 }

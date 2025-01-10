@@ -11,7 +11,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
-        this._settings = AppServiceProvider.GetAppSettingsProvider().AppSettings;
+        this._settings = AppServiceFactory.GetAppSettingsProvider().AppSettings;
     }
     
     public string? Test { get => _settings.Test; set { _settings.Test = value; OnPropertyChanged(); } }

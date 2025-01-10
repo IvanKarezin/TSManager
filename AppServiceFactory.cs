@@ -1,13 +1,14 @@
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using TSManager.Settings;
 
 namespace TSManager;
 
-public sealed class AppServiceProvider
+public static class AppServiceFactory
 {
     private static readonly IServiceCollection Services;
 
-    static AppServiceProvider()
+    static AppServiceFactory()
     {
         Services = new ServiceCollection();
         Services.AddServiceCollection();
