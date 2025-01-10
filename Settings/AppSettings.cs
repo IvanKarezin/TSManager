@@ -3,15 +3,10 @@ using System.Runtime.CompilerServices;
 
 namespace TSManager.Settings;
 
-public sealed class AppSettings : IAppSettings
+public sealed class AppSettings(string? test = "test") : IAppSettings
 {
-    private string? _test;
+    private string? _test = test;
 
-    public AppSettings(string? test = "test")
-    {
-        _test = test;
-    }
-    
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private void OnPropertyChanged([CallerMemberName] string prop = "")
