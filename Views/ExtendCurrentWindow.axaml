@@ -11,7 +11,7 @@
                 <TextBlock Margin="20" TextAlignment="Center">Дейли, пост дейли</TextBlock>
                 <TextBlock TextAlignment="Center">Затрачено времени: 2:45</TextBlock>
                 <Label HorizontalAlignment="Center">Продлить на:</Label>
-                <TimePicker HorizontalAlignment="Center"></TimePicker>
+                <TimePicker Margin="10" HorizontalAlignment="Center"></TimePicker>
                 <Button Width="100" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="10">OK</Button>
         </StackPanel>
 </Window>
