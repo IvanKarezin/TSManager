@@ -7,6 +7,7 @@ namespace TSManager.Models;
 public class WorkingWeek : ObservableObject
 {
     private bool _canEdit = true;
+    private WorkingDay _today;
     
     [Key]
     public int Id { get; set; }
@@ -19,6 +20,17 @@ public class WorkingWeek : ObservableObject
         {
             _canEdit = value;
             OnPropertyChanged(nameof(CanEdit));
+        }
+    }
+
+    [Required]
+    public WorkingDay Today
+    {
+        get => _today;
+        set
+        {
+            _today = value;
+            OnPropertyChanged(nameof(Today));
         }
     }
 
