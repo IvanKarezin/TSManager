@@ -4,7 +4,9 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
+using Microsoft.Extensions.DependencyInjection;
 using DesktopNotifications;
+using TSManager.Services;
 using TSManager.ViewModels;
 using TSManager.Views;
 
@@ -12,8 +14,16 @@ namespace TSManager;
 
 public partial class App : Application
 {
+    private readonly IServiceCollection _services;
     private MainWindow? _mainWindow;
     private ExtendCurrentWindow? _extendCurrentWindow;
+
+    public App()
+    {
+        _services = new ServiceCollection();;
+        this._services.AddServiceCollection(); 
+    }
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -26,9 +36,10 @@ public partial class App : Application
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
+            using ServiceProvider appServiceProvider = _services.BuildServiceProvider();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = new MainWindowViewModel(appServiceProvider.GetRequiredService<IApplicationService>()),
             };
             
             this._mainWindow = desktop.MainWindow as MainWindow;
@@ -88,7 +99,8 @@ public partial class App : Application
 
     private void NativeMenuItem_NextActivity_OnClick(object? sender, EventArgs e)
     {
-        var mv = AppServiceFactory.GetNotificationManager();
+        using ServiceProvider appServiceProvider = this._services.BuildServiceProvider();
+        var mv = appServiceProvider.GetRequiredService<INotificationManager>();
         mv.Initialize();
         var nt = new Notification()
         {

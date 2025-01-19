@@ -34,6 +34,9 @@ public partial class MainWindow : Window
         //TODO: создание DTO для TS и передача его команде
     }
 
+    /**
+     * TODO: Заменить на биндинг
+     */
     private void SetReadOnlyTimePeriodsAndCurrentProperty()
     {
         if (this.IsExec.IsChecked ?? false)
