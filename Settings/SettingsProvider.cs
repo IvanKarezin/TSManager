@@ -29,6 +29,8 @@ public sealed class SettingsProvider : ISettingsProvider
 
     private async void AppSettingsOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
+        //Необходимо из-за ньюансов сериализации в json
+        File.Delete("appsettings.json");
         await using var fileStream = new FileStream("appsettings.json", FileMode.OpenOrCreate);
         await JsonSerializer.SerializeAsync(fileStream, AppSettings);
     }

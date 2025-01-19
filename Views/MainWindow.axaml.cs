@@ -1,7 +1,9 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System.Threading.Tasks;
 using MsBox.Avalonia;
+using TSManager.ViewModels;
 
 namespace TSManager.Views;
 
@@ -62,7 +64,12 @@ public partial class MainWindow : Window
 
     private void ParametersItem_OnClick(object? sender, RoutedEventArgs e)
     {
-        var parameters = new ParametersWindow();
+        var parameters = new ParametersWindow()
+        {
+            DataContext = new ParametersWindowViewModel((this.DataContext as MainWindowViewModel)?
+                                                        .ApplicationService.ApplicationContext.AppSettings 
+                                                        ?? throw new InvalidOperationException())
+        };
         parameters.Show();
     }
 }

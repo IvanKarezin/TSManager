@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:TSManager.ViewModels"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="700"
         x:Class="TSManager.Views.ParametersWindow"
         x:DataType="vm:ParametersWindowViewModel"
         Title="Параметры"
@@ -15,27 +15,32 @@
         
     <StackPanel Margin="20">
             <TextBlock>Продолжительность рабочего дня</TextBlock>
-            <RadioButton GroupName="DurationType">Ограниченное время</RadioButton>
-            <RadioButton GroupName="DurationType">Неограниченное время</RadioButton>
+            <RadioButton GroupName="DurationType" IsChecked="{Binding Settings.WorkingDayLimitation, Mode=TwoWay}">Ограниченное время</RadioButton>
+            <RadioButton GroupName="DurationType" IsChecked="{Binding !Settings.WorkingDayLimitation, Mode=TwoWay }">Неограниченное время</RadioButton>
             <TextBlock>Округление ТШ</TextBlock>
-            <RadioButton GroupName="TSRound">В большую сторону</RadioButton>
-            <RadioButton GroupName="TSRound">В меньшую сторону</RadioButton>
+            <RadioButton GroupName="TSRound" IsChecked="{Binding Settings.TsRoundingUp, Mode=TwoWay}">В большую сторону</RadioButton>
+            <RadioButton GroupName="TSRound" IsChecked="{Binding !Settings.TsRoundingUp, Mode=TwoWay}">В меньшую сторону</RadioButton>
             
             <TextBlock Margin="0,20, 0,0">Кратность таймшита (мин)</TextBlock>
-            <NumericUpDown />
+            <NumericUpDown Value="{Binding Settings.TsMultiplicity, Mode=TwoWay}"/>
             
             <TextBlock Margin="0,20,0,10">Формат таймшита:</TextBlock>
-            <TextBlock>Префикс описания</TextBlock>
-            <TextBox></TextBox>
             <TextBlock>Префикс задачи</TextBlock>
-            <TextBox></TextBox>
+            <TextBox Text="{Binding Settings.TaskPrefix, Mode=TwoWay}" />
+            
+            <TextBlock Margin="0,20,0,0">Время начала рабочего дня по умолчанию</TextBlock>
+            <TimePicker Name="WorkingDayBeginPicker" SelectedTime="{Binding Settings.WorkingDayDefaultBegin, Mode=TwoWay}"></TimePicker>
+            
+            <TextBlock Margin="0,20,0,0">Время начала перерыва по умолчанию</TextBlock>
+            <TimePicker Name="WorkingDayBrakeBeginPicker" SelectedTime="{Binding Settings.WorkingDayDefaultBrakeBegin, Mode=TwoWay}"></TimePicker>
+            
+            <TextBlock Margin="0,20,0,0">Продолжительность перерыва (мин):</TextBlock>
+            <NumericUpDown Name="WorkingDayBrakeDurationPicker" Value="{Binding Settings.WorkingDayBrakeDuration, Mode=TwoWay}"></NumericUpDown>
             
             <Grid ColumnDefinitions="5*,*" RowDefinitions="*,*">
                 <TextBlock Grid.Row="0" Margin="0, 20, 0,0" Grid.ColumnSpan="2">Директория ТШ</TextBlock>
-                <TextBox Grid.Column="0" Grid.Row="1" Margin="0,0,10,0" />
+                <TextBox Grid.Column="0" Grid.Row="1" Margin="0,0,10,0" Text="{Binding Settings.TsPath, Mode=TwoWay}"/>
                 <Button Grid.Row="1" Grid.Column="1">Открыть</Button>
             </Grid>
         </StackPanel>
-        
-        
 </Window>

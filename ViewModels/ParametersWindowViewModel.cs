@@ -1,6 +1,9 @@
+using TSManager.Settings;
+using TSManager.Views;
+
 namespace TSManager.ViewModels;
 
-public class ParametersWindowViewModel : ViewModelBase
+public class ParametersWindowViewModel(IAppSettings settings) : ViewModelBase
 {
-    
+    public IAppSettings Settings { get; } = settings;
 }
