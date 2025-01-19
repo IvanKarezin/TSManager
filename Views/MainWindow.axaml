@@ -26,7 +26,7 @@
                     <MenuItem Header="Сохранить" />
                 </MenuItem>
                 <MenuItem Header="Сервис">
-                    <MenuItem Header="Параметры" />
+                    <MenuItem Header="Параметры" Name="ParametersItem" Click="ParametersItem_OnClick"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -35,7 +35,7 @@
             <TimePicker Margin="10,0,10,0" VerticalAlignment="Center" SelectedTime="09:00"/>
             <Label VerticalAlignment="Center">Начало перерыва</Label>
             <TimePicker Margin="10,0,10,0" VerticalAlignment="Center" SelectedTime="13:00" />
-            <Label VerticalAlignment="Center">Продолжительность рабочего дня:</Label>
+            <Label VerticalAlignment="Center">Отработано:</Label>
             <TextBlock Margin="10,0,10, 0" VerticalAlignment="Center">06:12:54</TextBlock>
             <Button Margin="10,0,10,0" HorizontalAlignment="Stretch">Начать рабочий день</Button>
         </DockPanel>

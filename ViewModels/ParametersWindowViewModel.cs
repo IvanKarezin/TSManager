@@ -1,6 +1,6 @@
 namespace TSManager.ViewModels;
 
-public class ParametersWindowViewModel
+public class ParametersWindowViewModel : ViewModelBase
 {
     
 }

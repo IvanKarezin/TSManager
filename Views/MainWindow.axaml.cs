@@ -59,4 +59,10 @@ public partial class MainWindow : Window
     {
         this.SetReadOnlyTimePeriodsAndCurrentProperty();
     }
+
+    private void ParametersItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var parameters = new ParametersWindow();
+        parameters.Show();
+    }
 }
